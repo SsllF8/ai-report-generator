@@ -1,81 +1,169 @@
-# 📝 AI 报告自动生成器
+# 📝 AI Report Generator
 
-> 基于 AI 的智能报告生成工具，输入零散工作记录，一键生成结构化报告并导出 Word 文档。
+> Transform scattered, unstructured work notes into polished, professionally formatted Word documents. Supports multiple report templates including weekly reports, project updates, work summaries, and meeting minutes.
 
-## ✨ 功能特性
+![Streamlit](https://img.shields.io/badge/Streamlit-1.30+-red?logo=streamlit)
+![DeepSeek](https://img.shields.io/badge/DeepSeek-API-blue)
+![python-docx](https://img.shields.io/badge/python--docx-1.1+-green)
 
-- 🧠 **智能整理** — AI 自动将零散工作记录归类为"完成项/进行中/问题与风险/下周计划"
-- 📋 **多种模板** — 技术周报、项目周报、工作总结、会议纪要
-- 📄 **一键导出 Word** — 生成带格式排版的 .docx 文件（标题、表格、加粗等）
-- 👁️ **实时预览** — 生成后可预览报告内容，满意了再导出
-- ✍️ **自动润色** — AI 自动补充描述、优化措辞，让报告更专业
+![System Screenshot](screenshots/main.png)
 
-## 🛠 技术栈
+## 🎯 Use Cases
 
-| 技术 | 用途 |
-|------|------|
-| DeepSeek API | AI 内容生成与整理 |
-| python-docx | Word 文档生成与排版 |
-| Streamlit | Web 界面框架 |
-| python-dotenv | 环境变量管理 |
+### Workplace Scenarios
+- **Weekly Reports** — Jot down bullet points of what you did this week, and the AI organizes them into a structured weekly report with sections: completed work, in-progress items, blockers, and next week's plan
+- **Project Status Updates** — Paste unstructured project notes and get a formatted project progress report with milestones, risks, and next steps
+- **Meeting Minutes** — Throw in rough meeting notes (or a transcript) and get properly formatted minutes with attendees, discussion points, decisions, and action items
+- **Work Summaries** — End of month/quarter? Dump all your accomplishments and the AI creates a professional summary document
+- **Performance Reviews** — Compile your achievements throughout the year and generate a self-evaluation document
 
-## 🚀 快速开始
+### Personal Scenarios
+- **Learning Notes** — Convert messy study notes into organized summaries with key concepts and takeaways
+- **Event Reports** — After attending a conference or workshop, turn your notes into a formal event report to share with your team
+- **Blog Post Drafts** — Rough ideas → structured draft with introduction, body sections, and conclusion
 
-### 1. 克隆项目
+### Key Differentiator
+Most AI writing tools generate plain text. This tool goes further — it produces **properly formatted Word documents (.docx)** with headings, tables, bullet lists, and professional styling that you can directly submit to your manager or team.
 
-```bash
-git clone https://github.com/SsllF8/ai-report-generator.git
-cd ai-report-generator
+## ✨ Features
+
+### Core Capabilities
+- 📝 **Smart Content Organization** — AI automatically categorizes scattered notes into structured sections (completed/in-progress/issues/plans)
+- 📋 **4 Report Templates** — Technical Weekly Report, Project Weekly Report, Work Summary, Meeting Minutes
+- 📥 **One-Click Word Export** — Generate `.docx` files with professional formatting (headings, bold text, bullet lists, tables)
+- 👁️ **Live Preview** — Preview the generated report in the browser before exporting
+- ✏️ **Custom Input** — Support for both structured form input and free-form text input
+- 🎨 **Professional Styling** — Word exports include proper fonts, spacing, colors, and layout
+
+### Templates
+
+| Template | Best For | Sections |
+|----------|----------|----------|
+| **Technical Weekly Report** | Engineers, developers | Completed tasks, in-progress work, issues & solutions, next week's plan |
+| **Project Weekly Report** | Project managers | Project overview, milestone progress, risk assessment, resource status |
+| **Work Summary** | Monthly/quarterly reviews | Key achievements, challenges, growth areas, future goals |
+| **Meeting Minutes** | Post-meeting documentation | Meeting info, attendees, discussion topics, decisions, action items |
+
+## 🏗️ Architecture
+
+```
+┌─────────────────────────────────────────────────┐
+│              Streamlit Web UI                    │
+│  ┌──────────┐  ┌───────────┐  ┌─────────────┐  │
+│  │ Template │  │   Input   │  │  Preview &  │  │
+│  │ Selection│  │   Notes   │  │  Export     │  │
+│  └────┬─────┘  └─────┬─────┘  └──────┬──────┘  │
+└───────┼──────────────┼────────────────┼─────────┘
+        │              │                │
+┌───────▼──────────────▼────────────────▼─────────┐
+│              Backend Modules                     │
+│  ┌───────────────────┐  ┌───────────────────┐  │
+│  │ report_generator  │  │  doc_exporter     │  │
+│  │ .py               │  │  .py              │  │
+│  │ (AI → Structured  │  │  (Markdown →      │  │
+│  │  Report Content)  │  │   .docx with      │  │
+│  │                   │  │   formatting)      │  │
+│  └───────────────────┘  └───────────────────┘  │
+└─────────────────────────────────────────────────┘
+                                 │
+                                 ▼
+                       ┌──────────────────┐
+                       │  DeepSeek API    │
+                       │  (Content Gen)   │
+                       └──────────────────┘
 ```
 
-### 2. 安装依赖
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3. 配置环境变量
-
-```bash
-copy .env.example .env
-```
-
-填入你的 DeepSeek API Key（[申请地址](https://platform.deepseek.com/)）。
-
-### 4. 运行
-
-```bash
-streamlit run app.py
-```
-
-或者双击 `启动应用.bat`。
-
-## 📖 使用方法
-
-1. 选择报告模板（技术周报 / 项目周报 / 工作总结 / 会议纪要）
-2. 在文本框中输入零散的工作记录
-3. 填写报告标题和作者姓名
-4. 点击「✨ 生成报告」
-5. 预览生成的报告内容
-6. 满意后点击「📄 导出 Word」下载 .docx 文件
-
-## 📸 系统界面
-
-![系统主界面](screenshots/main.png)
-
-## 🔧 项目结构
+## 📁 Project Structure
 
 ```
 ai-report-generator/
-├── app.py              # Streamlit 主界面
-├── report_generator.py # AI 报告生成模块
-├── doc_exporter.py     # Word 文档导出模块
-├── requirements.txt    # Python 依赖
-├── .env.example        # 环境变量模板
-├── 启动应用.bat         # Windows 启动脚本
-└── screenshots/        # 项目截图
+├── app.py                  # Streamlit web interface
+├── report_generator.py     # AI report generation engine (templates + DeepSeek)
+├── doc_exporter.py         # Word document export (python-docx formatting)
+├── requirements.txt        # Python dependencies
+├── .env.example            # Environment variables template
+├── screenshots/            # UI screenshots
+│   └── main.png
+└── 启动应用.bat             # Windows quick start
 ```
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.9+
+- DeepSeek API Key ([Get one here](https://platform.deepseek.com))
+
+### Installation
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/SsllF8/ai-report-generator.git
+cd ai-report-generator
+
+# 2. Create virtual environment
+python -m venv .venv
+.venv\Scripts\activate      # Windows
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Configure environment
+cp .env.example .env
+# Edit .env and fill in your DEEPSEEK_API_KEY
+
+# 5. Run the application
+streamlit run app.py
+```
+
+Or simply double-click `启动应用.bat` on Windows.
+
+### How to Use
+
+1. **Choose Template** — Select from Technical Weekly Report, Project Weekly Report, Work Summary, or Meeting Minutes
+2. **Input Notes** — Type or paste your scattered work notes in the text area. For example:
+   ```
+   - 修复了用户登录页面的 bug，原因是 token 过期逻辑没处理好
+   - 完成了数据导出功能的开发
+   - 数据库查询有点慢，需要优化索引
+   - 和产品经理讨论了下个版本的需求排期
+   - 帮新同事 review 了代码
+   - 下周计划：开始做报表模块
+   ```
+3. **Generate** — Click "生成报告" and the AI will organize your notes into a structured report
+4. **Preview & Export** — Review the preview, then click "导出 Word" to download a formatted `.docx` file
+
+## ⚙️ Configuration
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `DEEPSEEK_API_KEY` | ✅ | Your DeepSeek API key |
+
+## 🛠️ Tech Stack
+
+| Component | Technology | Purpose |
+|-----------|-----------|---------|
+| Web Framework | Streamlit | Report editing & preview UI |
+| LLM | DeepSeek | Content generation and organization |
+| Document Generation | python-docx | Word document creation with formatting |
+| Template System | Custom (Python) | Structured prompt templates per report type |
+
+## 🔧 How It Works
+
+1. **Template Selection** — User selects a report template, which defines the output structure (sections, headings, tone)
+2. **Note Input** — User enters unstructured notes about their work
+3. **AI Generation** — The notes are sent to DeepSeek with a template-specific prompt that instructs the AI to:
+   - Classify each note into the appropriate section
+   - Expand and polish the language
+   - Maintain a professional tone
+   - Follow the template's structure exactly
+4. **Preview** — Generated report is displayed in the browser as formatted Markdown
+5. **Export** — The Markdown report is converted to a `.docx` file with:
+   - Proper heading hierarchy (H1, H2, H3)
+   - Bold text for emphasis
+   - Bullet lists and numbered lists
+   - Tables where applicable
+   - Consistent fonts and spacing
 
 ## 📄 License
 
-MIT
+This project is licensed under the MIT License.

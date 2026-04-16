@@ -135,7 +135,7 @@ streamlit run app.py
    - 表格
    - 统一字体和间距
 
-### 💡 面试要点 / Interview Talking Points
+### 💡 项目亮点 / Project Highlights
 
 **1. 为什么不直接让 AI 在网页上输出，还要导出 Word？**
 - 企业环境中，正式文档必须是 Word 格式（审批、归档、打印）
@@ -244,7 +244,7 @@ cp .env.example .env  # Fill in your DEEPSEEK_API_KEY
 streamlit run app.py
 ```
 
-### Interview Talking Points
+### Project Highlights
 
 **1. Why export to Word instead of just displaying text?**
 - Enterprise requires Word format for approval, archiving, and printing
